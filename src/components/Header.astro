@@ -1,0 +1,133 @@
+---
+const services = [
+  { name: 'Ant Control', slug: 'ant-control' },
+  { name: 'Cockroach Control', slug: 'cockroach-control' },
+  { name: 'Termite Control', slug: 'termite-control' },
+  { name: 'Rodent Control', slug: 'rodent-control' },
+  { name: 'Bed Bug Treatment', slug: 'bed-bug-treatment' },
+  { name: 'Spider Control', slug: 'spider-control' },
+  { name: 'Mosquito Control', slug: 'mosquito-control' },
+  { name: 'Wasp & Hornet Removal', slug: 'wasp-hornet-removal' },
+  { name: 'Flea & Tick Control', slug: 'flea-tick-control' },
+  { name: 'Wildlife Removal', slug: 'wildlife-removal' },
+  { name: 'Commercial Pest Control', slug: 'commercial-pest-control' },
+  { name: 'Residential Pest Control', slug: 'residential-pest-control' },
+  { name: 'One-Time Pest Treatment', slug: 'one-time-pest-treatment' },
+  { name: 'Monthly Pest Service', slug: 'monthly-pest-service' },
+  { name: 'Quarterly Pest Service', slug: 'quarterly-pest-service' },
+  { name: 'Termite Inspection', slug: 'termite-inspection' },
+  { name: 'Attic Insulation Cleaning', slug: 'attic-insulation-cleaning' },
+  { name: 'Crawl Space Treatment', slug: 'crawl-space-treatment' },
+  { name: 'Emergency Pest Control', slug: 'emergency-pest-control' },
+  { name: 'Preventive Pest Plans', slug: 'preventive-pest-plans' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 border-b border-gray-100 bg-white/95 backdrop-blur">
+  <div class="container-narrow">
+    <div class="flex h-16 items-center justify-between gap-4">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 shrink-0" aria-label="pestcontrolcorneliusnc home">
+        <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-600 text-white font-bold text-lg">PC</span>
+        <span class="hidden sm:block font-semibold text-gray-900 text-lg leading-tight">
+          pestcontrol<br class="sm:hidden" /><span class="text-primary-600">corneliusnc</span>
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+        <a href="/" class={`px-3 py-2 text-sm font-medium rounded-md transition ${currentPath === '/' ? 'text-primary-700 bg-primary-50' : 'text-gray-700 hover:text-primary-700 hover:bg-gray-50'}`}>Home</a>
+        
+        <!-- Services Dropdown -->
+        <div class="relative group">
+          <button 
+            type="button"
+            class={`px-3 py-2 text-sm font-medium rounded-md transition flex items-center gap-1 ${currentPath.startsWith('/services') ? 'text-primary-700 bg-primary-50' : 'text-gray-700 hover:text-primary-700 hover:bg-gray-50'}`}
+            aria-expanded="false"
+            aria-haspopup="true"
+            id="services-menu-button"
+          >
+            Services
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div 
+            class="absolute left-0 top-full z-50 mt-1 w-72 origin-top-left rounded-lg bg-white py-2 shadow-lg ring-1 ring-black/5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="services-menu-button"
+          >
+            <div class="max-h-96 overflow-y-auto">
+              <a href="/services" class="block px-4 py-2 text-sm font-semibold text-primary-700 hover:bg-primary-50" role="menuitem">All Services</a>
+              <div class="border-t border-gray-100 my-1"></div>
+              {services.map(s => (
+                <a href={`/services/${s.slug}`} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-700" role="menuitem">{s.name}</a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <a href="/areas" class={`px-3 py-2 text-sm font-medium rounded-md transition ${currentPath.startsWith('/areas') ? 'text-primary-700 bg-primary-50' : 'text-gray-700 hover:text-primary-700 hover:bg-gray-50'}`}>Service Areas</a>
+        <a href="/about" class={`px-3 py-2 text-sm font-medium rounded-md transition ${currentPath === '/about' ? 'text-primary-700 bg-primary-50' : 'text-gray-700 hover:text-primary-700 hover:bg-gray-50'}`}>About</a>
+        <a href="/blog" class={`px-3 py-2 text-sm font-medium rounded-md transition ${currentPath.startsWith('/blog') ? 'text-primary-700 bg-primary-50' : 'text-gray-700 hover:text-primary-700 hover:bg-gray-50'}`}>Blog</a>
+        <a href="/contact" class={`px-3 py-2 text-sm font-medium rounded-md transition ${currentPath === '/contact' ? 'text-primary-700 bg-primary-50' : 'text-gray-700 hover:text-primary-700 hover:bg-gray-50'}`}>Contact</a>
+      </nav>
+
+      <!-- CTA -->
+      <div class="flex items-center gap-3">
+        <a href="/contact" class="btn-primary text-sm py-2 px-4 hidden sm:inline-flex">
+          Get Free Quote
+        </a>
+        
+        <!-- Mobile menu button -->
+        <button 
+          type="button" 
+          class="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          id="mobile-menu-button"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="lg:hidden hidden border-t border-gray-100 bg-white" id="mobile-menu">
+    <div class="container-narrow space-y-1 py-3">
+      <a href="/" class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">Home</a>
+      <a href="/services" class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">All Services</a>
+      <div class="pl-3 space-y-1 max-h-48 overflow-y-auto">
+        {services.slice(0, 8).map(s => (
+          <a href={`/services/${s.slug}`} class="block rounded-md px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-50">{s.name}</a>
+        ))}
+        <a href="/services" class="block rounded-md px-3 py-1.5 text-sm font-medium text-primary-600">View all services →</a>
+      </div>
+      <a href="/areas" class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">Service Areas</a>
+      <a href="/about" class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">About</a>
+      <a href="/blog" class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">Blog</a>
+      <a href="/contact" class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50">Contact</a>
+      <a href="/contact" class="mt-2 block btn-primary text-center">Get Free Quote</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const btn = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      menu.classList.toggle('hidden');
+    });
+  }
+</script>

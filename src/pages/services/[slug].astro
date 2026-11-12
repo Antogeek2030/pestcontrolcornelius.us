@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { services, getServiceBySlug, getAllServiceSlugs } from '../../data/services';
+
+export function getStaticPaths() {
+  return getAllServiceSlugs().map(slug => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const service = getServiceBySlug(slug!);
+
+if (!service) {
+  return Astro.redirect('/services');
+}
+
+const relatedServices = services.filter(s => service.related.includes(s.slug));
+---
+
+<BaseLayout
+  title={`${service.name} in Cornelius, NC | pestcontrolcorneliusnc`}
+  description={service.shortDesc}
+  canonical={`/services/${service.slug}`}
+>
+  <!-- Hero -->
+  <section class="bg-primary-700 text-white">
+    <div class="container-narrow section-padding">
+      <nav class="text-sm text-primary-200 mb-4" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-white">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/services" class="hover:text-white">Services</a>
+        <span class="mx-2">/</span>
+        <span class="text-white">{service.name}</span>
+      </nav>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">{service.name}</h1>
+      <p class="text-primary-100 max-w-2xl text-lg leading-relaxed">
+        {service.shortDesc}
+      </p>
+    </div>
+  </section>
+
+  <!-- Intro + Process -->
+  <section class="section-padding">
+    <div class="container-narrow">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">About This Service</h2>
+          <p class="text-gray-700 leading-relaxed mb-8">
+            {service.intro}
+          </p>
+
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Our Process</h2>
+          <ol class="space-y-4 mb-10">
+            {service.process.map((step, i) => (
+              <li class="flex gap-4">
+                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary-100 text-primary-700 font-semibold text-sm">
+                  {i + 1}
+                </span>
+                <p class="text-gray-700 pt-1">{step}</p>
+              </li>
+            ))}
+          </ol>
+
+          <div class="rounded-xl bg-gray-50 border border-gray-200 p-6 mb-10">
+            <h3 class="font-semibold text-gray-900 mb-2">Typical Price Range</h3>
+            <p class="text-gray-700">{service.priceRange}</p>
+            <p class="text-sm text-gray-500 mt-2">Final pricing depends on property size, severity, and access. We provide clear quotes before any work begins.</p>
+          </div>
+
+          <!-- FAQ -->
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+          <div class="space-y-4">
+            {service.faqs.map(faq => (
+              <details class="group rounded-lg border border-gray-200 bg-white">
+                <summary class="flex cursor-pointer items-center justify-between px-5 py-4 font-medium text-gray-900 list-none">
+                  {faq.q}
+                  <svg class="h-5 w-5 text-gray-400 transition group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </summary>
+                <div class="px-5 pb-4 text-gray-600 leading-relaxed">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+
+        <!-- Sidebar CTA -->
+        <aside class="lg:col-span-1">
+          <div class="sticky top-24 rounded-xl bg-primary-700 p-6 text-white">
+            <h3 class="text-lg font-semibold mb-3">Ready for help with {service.name.toLowerCase()}?</h3>
+            <p class="text-primary-100 text-sm mb-5 leading-relaxed">
+              Tell us about the situation and we will recommend the most practical next step.
+            </p>
+            <a href="/contact" class="btn-primary bg-white text-primary-700 hover:bg-primary-50 w-full justify-center">
+              Request Free Quote
+            </a>
+            <p class="mt-4 text-xs text-primary-200">
+              Serving Cornelius, NC and nearby communities.
+            </p>
+          </div>
+
+          {relatedServices.length > 0 && (
+            <div class="mt-8">
+              <h3 class="font-semibold text-gray-900 mb-3">Related Services</h3>
+              <ul class="space-y-2">
+                {relatedServices.map(s => (
+                  <li>
+                    <a href={`/services/${s.slug}`} class="text-primary-600 hover:text-primary-700 text-sm font-medium">
+                      {s.name} →
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="section-padding bg-gray-50">
+    <div class="container-narrow text-center">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Questions about {service.name.toLowerCase()}?</h2>
+      <p class="text-gray-600 max-w-lg mx-auto mb-6">
+        We are happy to discuss your specific situation and help you decide on the right approach.
+      </p>
+      <a href="/contact" class="btn-primary">Contact Us</a>
+    </div>
+  </section>
+</BaseLayout>

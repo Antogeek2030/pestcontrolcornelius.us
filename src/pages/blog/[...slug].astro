@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<BaseLayout
+  title={`${post.data.title} | pestcontrolcorneliusnc Blog`}
+  description={post.data.description}
+  canonical={`/blog/${post.slug}`}
+>
+  <article>
+    <header class="bg-primary-700 text-white">
+      <div class="container-narrow section-padding">
+        <nav class="text-sm text-primary-200 mb-4" aria-label="Breadcrumb">
+          <a href="/" class="hover:text-white">Home</a>
+          <span class="mx-2">/</span>
+          <a href="/blog" class="hover:text-white">Blog</a>
+          <span class="mx-2">/</span>
+          <span class="text-white line-clamp-1">{post.data.title}</span>
+        </nav>
+        <h1 class="text-3xl sm:text-4xl font-bold mb-4 max-w-3xl">{post.data.title}</h1>
+        <p class="text-primary-100">
+          <time datetime={post.data.pubDate.toISOString()}>
+            {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+          <span class="mx-2">·</span>
+          {post.data.author}
+        </p>
+      </div>
+    </header>
+
+    <div class="section-padding">
+      <div class="container-narrow max-w-3xl">
+        <div class="prose prose-lg prose-gray max-w-none
+          prose-headings:font-bold prose-headings:text-gray-900
+          prose-a:text-primary-600 prose-a:no-underline hover:prose-a:underline
+          prose-strong:text-gray-900">
+          <Content />
+        </div>
+
+        <div class="mt-12 pt-8 border-t border-gray-200">
+          <a href="/blog" class="text-primary-600 font-medium hover:text-primary-700">← Back to Blog</a>
+        </div>
+
+        <div class="mt-10 rounded-xl bg-primary-50 border border-primary-100 p-6 text-center">
+          <h2 class="text-lg font-semibold text-gray-900 mb-2">Need help with a pest problem?</h2>
+          <p class="text-gray-600 mb-4">We are happy to discuss your situation and recommend practical next steps.</p>
+          <a href="/contact" class="btn-primary">Request a Free Quote</a>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

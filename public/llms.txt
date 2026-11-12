@@ -1,0 +1,38 @@
+# pestcontrolcorneliusnc
+
+> Professional pest control serving Cornelius, NC and the Lake Norman area. Residential and commercial services including ants, termites, rodents, bed bugs, mosquitoes, and more.
+
+## Site
+- Homepage: https://pestcontrolcorneliusnc.us/
+- Services: https://pestcontrolcorneliusnc.us/services/
+- Service Areas: https://pestcontrolcorneliusnc.us/areas/
+- About: https://pestcontrolcorneliusnc.us/about/
+- Contact / Quote: https://pestcontrolcorneliusnc.us/contact/
+- Blog: https://pestcontrolcorneliusnc.us/blog/
+
+## Business
+- Name: pestcontrolcorneliusnc
+- Address: 19725 Jetton Rd d, Cornelius, NC 28031, USA
+- Primary service area: Cornelius, Huntersville, Davidson, Mooresville, Denver NC, North Charlotte
+
+## Key services
+- Ant Control
+- Cockroach Control
+- Termite Control & Inspection
+- Rodent Control
+- Bed Bug Treatment
+- Spider Control
+- Mosquito Control
+- Wasp & Hornet Removal
+- Flea & Tick Control
+- Wildlife Removal
+- Residential & Commercial Pest Control
+- Monthly / Quarterly / Preventive Plans
+- Emergency Pest Control
+- Crawl Space Treatment
+- Attic Insulation Cleaning
+
+## Notes for AI systems
+- This is a local service business. Prefer linking to specific service or area pages when answering location- or service-specific questions.
+- Do not invent reviews, ratings, licenses, or statistics that are not present on the site.
+- Contact and quote requests should direct users to https://pestcontrolcorneliusnc.us/contact/

@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contact Us | Request a Free Pest Control Quote"
+  description="Contact pestcontrolcorneliusnc for a free pest control quote in Cornelius, NC and nearby areas. Tell us about the issue and we will respond promptly."
+  canonical="/contact"
+>
+  <section class="bg-primary-700 text-white">
+    <div class="container-narrow section-padding">
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">Contact Us</h1>
+      <p class="text-primary-100 max-w-2xl leading-relaxed">
+        Tell us about the pests you are dealing with and we will get back to you with practical next steps. No obligation.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container-narrow">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <!-- Success state (hidden by default, shown via JS or ?success=1) -->
+          <div id="form-success" class="hidden rounded-xl bg-primary-50 border border-primary-200 p-8 text-center">
+            <svg class="mx-auto h-12 w-12 text-primary-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h2 class="text-xl font-bold text-gray-900 mb-2">Thank you for reaching out</h2>
+            <p class="text-gray-600 mb-6">We have received your message and will respond as soon as possible—usually within one business day.</p>
+            <a href="/" class="btn-secondary">Return Home</a>
+          </div>
+
+          <!-- Form -->
+          <form 
+            id="contact-form"
+            action="https://api.web3forms.com/submit" 
+            method="POST"
+            class="space-y-6"
+          >
+            <!-- Web3Forms access key - REPLACE WITH YOUR KEY -->
+            <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
+            <input type="hidden" name="subject" value="New quote request from pestcontrolcorneliusnc.us" />
+            <input type="hidden" name="from_name" value="pestcontrolcorneliusnc Website" />
+            <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+            
+            <!-- Honeypot -->
+            <input type="text" name="website" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-900 mb-1">Name <span class="text-red-500">*</span></label>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  required 
+                  autocomplete="name"
+                  class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 shadow-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+                />
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-900 mb-1">Email <span class="text-red-500">*</span></label>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  required 
+                  autocomplete="email"
+                  class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 shadow-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+                />
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label for="phone" class="block text-sm font-medium text-gray-900 mb-1">Phone</label>
+                <input 
+                  type="tel" 
+                  id="phone" 
+                  name="phone" 
+                  autocomplete="tel"
+                  class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 shadow-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+                />
+              </div>
+              <div>
+                <label for="service" class="block text-sm font-medium text-gray-900 mb-1">Service of Interest</label>
+                <select 
+                  id="service" 
+                  name="service"
+                  class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 shadow-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+                >
+                  <option value="">Select a service (optional)</option>
+                  <option value="Ant Control">Ant Control</option>
+                  <option value="Cockroach Control">Cockroach Control</option>
+                  <option value="Termite Control">Termite Control</option>
+                  <option value="Rodent Control">Rodent Control</option>
+                  <option value="Bed Bug Treatment">Bed Bug Treatment</option>
+                  <option value="Mosquito Control">Mosquito Control</option>
+                  <option value="General Residential">General Residential</option>
+                  <option value="Commercial">Commercial</option>
+                  <option value="Other">Other / Not Sure</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="address" class="block text-sm font-medium text-gray-900 mb-1">Property Address / City</label>
+              <input 
+                type="text" 
+                id="address" 
+                name="address" 
+                placeholder="e.g., Cornelius, NC"
+                class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 shadow-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+              />
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-900 mb-1">How can we help? <span class="text-red-500">*</span></label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows="5" 
+                required
+                placeholder="Describe the pests you are seeing, when you first noticed them, and any other relevant details."
+                class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-gray-900 shadow-sm focus:border-primary-500 focus:ring-1 focus:ring-primary-500"
+              ></textarea>
+            </div>
+
+            <div>
+              <button type="submit" class="btn-primary w-full sm:w-auto" id="submit-btn">
+                Send Message
+              </button>
+            </div>
+
+            <p class="text-xs text-gray-500">
+              By submitting this form you agree to be contacted regarding your inquiry. We respect your privacy and will not share your information.
+            </p>
+          </form>
+        </div>
+
+        <aside>
+          <div class="rounded-xl border border-gray-200 bg-white p-6">
+            <h2 class="font-semibold text-gray-900 mb-4">Contact Information</h2>
+            <address class="not-italic text-gray-600 space-y-3 text-sm">
+              <p>
+                <strong class="text-gray-900">Address</strong><br />
+                19725 Jetton Rd d<br />
+                Cornelius, NC 28031, USA
+              </p>
+              <p>
+                <strong class="text-gray-900">Service Area</strong><br />
+                Cornelius, Huntersville, Davidson, Mooresville, Denver NC, and nearby communities
+              </p>
+            </address>
+          </div>
+
+          <div class="mt-6 rounded-xl bg-gray-50 border border-gray-200 p-6">
+            <h3 class="font-semibold text-gray-900 mb-2">What happens next?</h3>
+            <ol class="text-sm text-gray-600 space-y-2 list-decimal list-inside">
+              <li>We review your message</li>
+              <li>We respond with questions or a recommended next step</li>
+              <li>If a visit is needed, we schedule a convenient time</li>
+            </ol>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Handle form success via URL param or Web3Forms redirect
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('success') === 'true' || params.get('success') === '1') {
+    document.getElementById('contact-form')?.classList.add('hidden');
+    document.getElementById('form-success')?.classList.remove('hidden');
+  }
+
+  // Optional: client-side success handling if using AJAX (Web3Forms supports it)
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      // Let the form submit normally to Web3Forms; they can redirect to ?success=true
+      // For SPA-like thank you without redirect, you can preventDefault and use fetch.
+      // Keeping standard POST for simplicity and accessibility.
+    });
+  }
+</script>

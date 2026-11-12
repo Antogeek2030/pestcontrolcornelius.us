@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { areas, getAreaBySlug, getAllAreaSlugs } from '../../data/areas';
+import { services } from '../../data/services';
+
+export function getStaticPaths() {
+  return getAllAreaSlugs().map(slug => ({
+    params: { slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const area = getAreaBySlug(slug!);
+
+if (!area) {
+  return Astro.redirect('/areas');
+}
+
+const popularServices = services.slice(0, 6);
+---
+
+<BaseLayout
+  title={`Pest Control in ${area.name} | pestcontrolcorneliusnc`}
+  description={area.shortDesc}
+  canonical={`/areas/${area.slug}`}
+>
+  <section class="bg-primary-700 text-white">
+    <div class="container-narrow section-padding">
+      <nav class="text-sm text-primary-200 mb-4" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-white">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/areas" class="hover:text-white">Service Areas</a>
+        <span class="mx-2">/</span>
+        <span class="text-white">{area.name}</span>
+      </nav>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">Pest Control in {area.name}</h1>
+      <p class="text-primary-100 max-w-2xl text-lg leading-relaxed">
+        {area.shortDesc}
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container-narrow">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Serving {area.name}</h2>
+          <p class="text-gray-700 leading-relaxed mb-8">
+            {area.intro}
+          </p>
+
+          {area.neighborhoods && area.neighborhoods.length > 0 && (
+            <div class="mb-10">
+              <h3 class="text-lg font-semibold text-gray-900 mb-3">Neighborhoods & Areas We Commonly Serve</h3>
+              <ul class="grid sm:grid-cols-2 gap-2">
+                {area.neighborhoods.map(n => (
+                  <li class="flex items-center gap-2 text-gray-700">
+                    <svg class="h-4 w-4 text-primary-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    {n}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Popular Services in {area.name}</h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            {popularServices.map(s => (
+              <a href={`/services/${s.slug}`} class="block rounded-lg border border-gray-200 p-4 hover:border-primary-300 transition">
+                <span class="font-medium text-gray-900">{s.name}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <aside>
+          <div class="sticky top-24 rounded-xl bg-primary-700 p-6 text-white">
+            <h3 class="text-lg font-semibold mb-3">Need pest control in {area.name}?</h3>
+            <p class="text-primary-100 text-sm mb-5 leading-relaxed">
+              Request a free quote. We will discuss the issue and recommend the most practical solution.
+            </p>
+            <a href="/contact" class="btn-primary bg-white text-primary-700 hover:bg-primary-50 w-full justify-center">
+              Get Free Quote
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
